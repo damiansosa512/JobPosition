@@ -22,12 +22,19 @@ public class AvaiabillityControler {
     public Output create (@RequestBody Input input) {
     	Node [][][][] matrizDisponibilidad = Position.generateMatrix(input);
     	
-    	//prueba que se cargo ese nodo bien
-    	System.out.println(matrizDisponibilidad [0][0][1][3].getIdPuesto());
+    	//prueba que se cargo esos nodos
+    	System.out.println(matrizDisponibilidad [0][0][0][0].getIdPuesto());
+    	System.out.println(matrizDisponibilidad [0][0][1][2].getIdPuesto());
+    	System.out.println(matrizDisponibilidad [0][0][2][0].getIdPuesto());
+
     	
-    	HashMap <Integer, Persona> puestosDisponiblesFijos = Position.generarPuestosFijos(input); 
-    	//System.out.println(puestosDisponiblesFijos.containsKey(123456));
-    	//System.out.println(puestosDisponiblesFijos.containsKey(456789));
+    	HashMap <Integer, Persona> puestosDisponiblesFijos = Position.generarPuestosFijos(input);
+    	//prueba que se cargo bien el hashmap
+    	System.out.println(puestosDisponiblesFijos.containsKey(456789));
+    	
+    	HashMap <Integer, Persona> puestosDisponiblesVariables = Position.generarPuestosVariables(input);
+    	//prueba que se cargo bien el hashmap    	
+    	System.out.println(puestosDisponiblesVariables.containsKey(123456));    	
     	
     	//retorna cualquier cosa por el momento
     	return new Output(123456, 1, 1);

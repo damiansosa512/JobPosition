@@ -74,10 +74,15 @@ public abstract class Position {
 		}	
 	
 	
+	/**
+	 * metodo que genera un hashmap con las personas que tiene un puesto fijo
+	 * @param input json parseado a objetos con los datos disponibles para las locaciones
+	 * @return hash map con los las personas que tienen puestos fijos
+	 */
 	public static HashMap<Integer, Persona> generarPuestosFijos(Input input){
 		HashMap<Integer, Persona> puestosFijos = new HashMap<Integer, Persona>();
-		for(int i=0; i <= input.getEquipos().size(); i++) {
-			for(int j=0; j <= input.getEquipos().get(i).getPersonas().size(); j++) {
+		for(int i=0; i < input.getEquipos().size(); i++) {
+			for(int j=0; j < input.getEquipos().get(i).getPersonas().size(); j++) {
 				if (input.getEquipos().get(i).getPersonas().get(j).isPuestoFijo()) {
 					puestosFijos.put(input.getEquipos().get(i).getPersonas().get(j).getCuil(), input.getEquipos().get(i).getPersonas().get(j));
 				}
@@ -85,6 +90,23 @@ public abstract class Position {
 		}
 		return puestosFijos;
 	}
+	
+	/**
+	 * metodo que genera un hashmap conlas personas que tiene un puesto variable
+	 * @param input json parseado a objetos con los datos disponibles para las locaciones
+	 * @return hash map con los las personas que tienen puestos variable
+	 */	
+	public static HashMap<Integer, Persona> generarPuestosVariables(Input input){
+		HashMap<Integer, Persona> puestosFijos = new HashMap<Integer, Persona>();
+		for(int i=0; i < input.getEquipos().size(); i++) {
+			for(int j=0; j < input.getEquipos().get(i).getPersonas().size(); j++) {
+				if (!input.getEquipos().get(i).getPersonas().get(j).isPuestoFijo()) {
+					puestosFijos.put(input.getEquipos().get(i).getPersonas().get(j).getCuil(), input.getEquipos().get(i).getPersonas().get(j));
+				}
+			}
+		}
+		return puestosFijos;
+	}	
 	
 	
 }
