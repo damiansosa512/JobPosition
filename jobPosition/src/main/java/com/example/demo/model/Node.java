@@ -17,7 +17,7 @@ public class Node {
 	public int x;
 	public int y;
 	public Double tan;
-	public int ocupado;
+	public boolean ocupado;
 	public int cuil;
 	
 	
@@ -46,10 +46,10 @@ public class Node {
 	public void setTan(Double tan) {
 		this.tan = tan;
 	}
-	public int getOcupado() {
+	public boolean getOcupado() {
 		return ocupado;
 	}
-	public void setOcupado(int ocupado) {
+	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
 	public int getCuil() {
