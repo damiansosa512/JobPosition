@@ -79,34 +79,43 @@ public abstract class Position {
 	 * @param input json parseado a objetos con los datos disponibles para las locaciones
 	 * @return hash map con los las personas que tienen puestos fijos
 	 */
-	public static HashMap<Integer, Persona> generarPuestosFijos(Input input){
-		HashMap<Integer, Persona> puestosFijos = new HashMap<Integer, Persona>();
+	public static HashMap<String, Persona> generarPuestosFijos(Input input){
+		HashMap<String, Persona> puestosFijos = new HashMap<String, Persona>();
 		for(int i=0; i < input.getEquipos().size(); i++) {
 			for(int j=0; j < input.getEquipos().get(i).getPersonas().size(); j++) {
 				if (input.getEquipos().get(i).getPersonas().get(j).isPuestoFijo()) {
-					puestosFijos.put(input.getEquipos().get(i).getPersonas().get(j).getCuil(), input.getEquipos().get(i).getPersonas().get(j));
+					String key = String.valueOf(input.getEquipos().get(i).getPersonas().get(j).getX()).concat(String.valueOf(input.getEquipos().get(i).getPersonas().get(j).getY()));
+					puestosFijos.put(key, input.getEquipos().get(i).getPersonas().get(j));
 				}
 			}
 		}
 		return puestosFijos;
 	}
 	
+	
 	/**
-	 * metodo que genera un hashmap conlas personas que tiene un puesto variable
+	 * Metodo que recibe una matriz vacia y un objeto, encargandose de poblar dicha estructura
+	 * @param posiciones matriz de cuatro dimensiones [dias, planos, sectores, puestos] vacia
 	 * @param input json parseado a objetos con los datos disponibles para las locaciones
-	 * @return hash map con los las personas que tienen puestos variable
-	 */	
-	public static HashMap<Integer, Persona> generarPuestosVariables(Input input){
-		HashMap<Integer, Persona> puestosFijos = new HashMap<Integer, Persona>();
-		for(int i=0; i < input.getEquipos().size(); i++) {
-			for(int j=0; j < input.getEquipos().get(i).getPersonas().size(); j++) {
-				if (!input.getEquipos().get(i).getPersonas().get(j).isPuestoFijo()) {
-					puestosFijos.put(input.getEquipos().get(i).getPersonas().get(j).getCuil(), input.getEquipos().get(i).getPersonas().get(j));
+	 * @return matriz completa con los puestos disponibles por dia, plano sector y puesto 
+	 */
+	public static void completarMatrixConFijos(Node [][][][] posiciones, HashMap <String, Persona> persona) {		
+		for(int h=0; h < posiciones.length ; h++) {
+			for(int i=0; i < posiciones[h].length; i++) {
+				for(int j=0; j < posiciones[h][i].length; j++) {
+					for (int k=0; k < posiciones[h][i][j].length; k++) {
+						if (posiciones[h][i][j][k]!=null && persona.containsKey(String.valueOf(posiciones[h][i][j][k].getX()).concat(String.valueOf(posiciones[h][i][j][k].getY())))){
+							//ocupo la posicion en la matriz
+							posiciones[h][i][j][k].setOcupado(true);
+							posiciones[h][i][j][k].setCuil(persona.get(String.valueOf(posiciones[h][i][j][k].getX()).concat(String.valueOf(posiciones[h][i][j][k].getY()))).getCuil());
+							//saco del hashmap el valor
+							persona.remove((String.valueOf(posiciones[h][i][j][k].getX()).concat(String.valueOf(posiciones[h][i][j][k].getY()))));
+						} 								
+					}
 				}
-			}
-		}
-		return puestosFijos;
-	}	
+			}			
+		}		
+	}
 	
 	
 }

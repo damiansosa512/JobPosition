@@ -28,13 +28,15 @@ public class AvaiabillityControler {
     	System.out.println(matrizDisponibilidad [0][0][2][0].getIdPuesto());
 
     	
-    	HashMap <Integer, Persona> puestosDisponiblesFijos = Position.generarPuestosFijos(input);
-    	//prueba que se cargo bien el hashmap
-    	System.out.println(puestosDisponiblesFijos.containsKey(456789));
+    	HashMap <String, Persona> puestosDisponiblesFijos = Position.generarPuestosFijos(input);
+    	//prueba que se cargo bien el hashmap con el puesto fijo
+    	System.out.println("Puesto fijo:" + puestosDisponiblesFijos.containsKey("3030"));
     	
-    	HashMap <Integer, Persona> puestosDisponiblesVariables = Position.generarPuestosVariables(input);
-    	//prueba que se cargo bien el hashmap    	
-    	System.out.println(puestosDisponiblesVariables.containsKey(123456));    	
+    	
+    	Position.completarMatrixConFijos(matrizDisponibilidad, puestosDisponiblesFijos);
+    	//prueba que se marco en la matriz el puesto como ocupado con el cuil
+    	System.out.println(matrizDisponibilidad[0][0][1][1].getOcupado());
+    	System.out.println(matrizDisponibilidad[0][0][1][1].getCuil());
     	
     	//retorna cualquier cosa por el momento
     	return new Output(123456, 1, 1);
