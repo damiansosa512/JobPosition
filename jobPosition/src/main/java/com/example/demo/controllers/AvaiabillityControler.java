@@ -37,6 +37,10 @@ public class AvaiabillityControler {
     	//prueba que se marco en la matriz el puesto como ocupado con el cuil
     	System.out.println(matrizDisponibilidad[0][0][1][1].getOcupado());
     	System.out.println(matrizDisponibilidad[0][0][1][1].getCuil());
+    	System.out.println(matrizDisponibilidad[1][0][1][1].getOcupado());
+    	System.out.println(matrizDisponibilidad[1][0][1][1].getCuil());
+    	System.out.println(matrizDisponibilidad[2][0][1][1].getOcupado());
+    	System.out.println(matrizDisponibilidad[2][0][1][1].getCuil());    	
     	
     	//retorna cualquier cosa por el momento
     	return new Output(123456, 1, 1);

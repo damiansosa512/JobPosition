@@ -15,10 +15,11 @@ public abstract class Position {
 	 * @return matriz cuatro dimensiones - Dias, planos, sectores, puestos. 
 	 */
 	public static Node[][][][] generateMatrix(Input input) {
+		int diasLaborales = input.getInstitucion().getDiasOficina();
 		int planos = input.getInstitucion().getPlanos().size();
 		int[] index = Position.maxIndex(input);
 		// to do: sacar el 5 que representa los dias de la semana por un dato configurable
-		Node[][][][] posiciones = new Node[5][planos][index[0]][index[1]];
+		Node[][][][] posiciones = new Node[diasLaborales][planos][index[0]][index[1]];
 		Position.completarMatrix(posiciones, input);
 		return posiciones;
 	}
@@ -58,8 +59,8 @@ public abstract class Position {
 	 * @return matriz completa con los puestos disponibles por dia, plano sector y puesto 
 	 */
 	public static Node[][][][] completarMatrix(Node [][][][] posiciones, Input input) {		
-		int cantdiasLaborables = posiciones[0].length;
-		for(int h=0; h <= cantdiasLaborables; h++) {
+		int cantdiasLaborables = posiciones.length;
+		for(int h=0; h < cantdiasLaborables; h++) {
 			for(int i=0; i < input.getInstitucion().getPlanos().size(); i++) {
 				ArrayList<Sector> sector = input.getInstitucion().getPlanos().get(i).getSectores();
 				for(int j=0; j < sector.size(); j++) {
@@ -108,8 +109,6 @@ public abstract class Position {
 							//ocupo la posicion en la matriz
 							posiciones[h][i][j][k].setOcupado(true);
 							posiciones[h][i][j][k].setCuil(persona.get(String.valueOf(posiciones[h][i][j][k].getX()).concat(String.valueOf(posiciones[h][i][j][k].getY()))).getCuil());
-							//saco del hashmap el valor
-							persona.remove((String.valueOf(posiciones[h][i][j][k].getX()).concat(String.valueOf(posiciones[h][i][j][k].getY()))));
 						} 								
 					}
 				}
