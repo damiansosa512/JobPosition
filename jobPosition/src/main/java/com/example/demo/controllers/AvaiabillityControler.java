@@ -18,8 +18,7 @@ public class AvaiabillityControler {
 
     @RequestMapping(value = "/avaiable", method = RequestMethod.POST)
     public Output create (@RequestBody Input input) {
-    	
-    	
+    	   	
     	NodeMatriz[][] matrizCompletaPosiciones = Position.generateMatrixPosiciones(input);
     	ArrayList<NodeMatriz> arrayOrdenadoPosiciones = Position.generarVectorOrdenadoPosiciones(matrizCompletaPosiciones);
     	ArrayList<NodeVectorEquipos> vectorEquipos = Position.generateVectorEquipos(input);
