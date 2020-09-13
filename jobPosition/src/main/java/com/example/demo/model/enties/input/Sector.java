@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.enties.input;
 
 import java.util.ArrayList;
 
@@ -7,17 +7,17 @@ public class Sector {
 	public Sector() {
 	}		
 	
-	public Sector(int idSector, ArrayList<Puesto> puestos) {
+	public Sector(String idSector, ArrayList<Puesto> puestos) {
 		super();
 		this.idSector = idSector;
 		Puestos = puestos;
 	}
 	
-	public int getIdSector() {
+	public String getIdSector() {
 		return idSector;
 	}
 
-	public void setIdSector(int idSector) {
+	public void setIdSector(String idSector) {
 		this.idSector = idSector;
 	}
 
@@ -29,6 +29,6 @@ public class Sector {
 		Puestos = puestos;
 	}
 
-	public int idSector;
+	public String idSector;
 	public ArrayList<Puesto> Puestos;
 }

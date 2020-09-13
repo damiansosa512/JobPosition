@@ -1,12 +1,11 @@
 package com.example.demo.model;
 
-import java.util.ArrayList;
+import com.example.demo.model.enties.input.Institucion;
 
 public class Input {
-	public Input(Institucion institucion, ArrayList<Equipo> equipos) {
+	public Input(Institucion institucion) {
 		super();
 		this.institucion = institucion;
-		this.equipos = equipos;
 	}
 
 	public Input() {
@@ -18,13 +17,6 @@ public class Input {
 	public void setInstitucion(Institucion institucion) {
 		this.institucion = institucion;
 	}
-	public ArrayList<Equipo> getEquipos() {
-		return equipos;
-	}
-	public void setEquipos(ArrayList<Equipo> equipos) {
-		this.equipos = equipos;
-	}
 
 	public Institucion institucion;
-	public ArrayList<Equipo> equipos;
 }
