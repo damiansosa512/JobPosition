@@ -33,8 +33,8 @@ public abstract class Position {
 	public static int[] maxIndex(Input input) {
 		int sectores = 0;
 		int puestos = 0;
-		for(int i=0; i < input.getInstitucion().getPlanos().size(); i++) {
-			ArrayList<Sector> sector = input.getInstitucion().getPlanos().get(i).getSectores();
+		for(int i=0; i < input.getPlanos().size(); i++) {
+			ArrayList<Sector> sector = input.getPlanos().get(i).getSectores();
 			for(int j=0; j < sector.size(); j++) {
 				ArrayList <Puesto> puesto = sector.get(j).getPuestos();
 				for (int k=0; k < puesto.size(); k++) {
@@ -60,8 +60,8 @@ public abstract class Position {
 	 */
 	public static NodeMatriz[][] generateMatrix(NodeMatriz [][] posiciones, Input input) {		
 			
-			for(int i = 0; i < input.getInstitucion().getPlanos().size(); i++) {
-				Plano plano = input.getInstitucion().getPlanos().get(i);
+			for(int i = 0; i < input.getPlanos().size(); i++) {
+				Plano plano = input.getPlanos().get(i);
 				for(int j=0; j < plano.getSectores().size(); j++) {
 					Sector sector = plano.getSectores().get(j);
 					for (int k=0; k < sector.getPuestos().size(); k++) {
@@ -78,8 +78,8 @@ public abstract class Position {
 	public static ArrayList<NodeVectorEquipos> generateVectorEquipos(Input input) {	
 		
 		ArrayList<NodeVectorEquipos> personas = new ArrayList<NodeVectorEquipos>();
-				for(int j=0; j < input.getInstitucion().getEquipos().size(); j++) {
-					Equipo equipo = input.getInstitucion().getEquipos().get(j);
+				for(int j=0; j < input.getEquipos().size(); j++) {
+					Equipo equipo = input.getEquipos().get(j);
 					for (int k=0; k < equipo.getPersonas().size(); k++) {
 						Persona persona = equipo.getPersonas().get(k);																	
 						NodeVectorEquipos nodeVectorEquipos = new NodeVectorEquipos(equipo.idEquipo, persona.getCuil());

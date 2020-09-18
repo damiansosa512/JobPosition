@@ -22,7 +22,7 @@ public class AvaiabillityControler {
     	NodeMatriz[][] matrizCompletaPosiciones = Position.generateMatrixPosiciones(input);
     	ArrayList<NodeMatriz> arrayOrdenadoPosiciones = Position.generarVectorOrdenadoPosiciones(matrizCompletaPosiciones);
     	ArrayList<NodeVectorEquipos> vectorEquipos = Position.generateVectorEquipos(input);
-    	Output out = Position.buildMessage(arrayOrdenadoPosiciones, vectorEquipos, input.getInstitucion().getPlanos().get(0).getCantDias());
+    	Output out = Position.buildMessage(arrayOrdenadoPosiciones, vectorEquipos, input.getPlanos().get(0).getCantDias());
     	return out;
     }
     

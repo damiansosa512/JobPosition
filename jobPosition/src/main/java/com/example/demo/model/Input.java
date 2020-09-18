@@ -1,22 +1,40 @@
 package com.example.demo.model;
 
-import com.example.demo.model.enties.input.Institucion;
+import com.example.demo.model.enties.input.Plano;
+import com.example.demo.model.enties.input.Equipo;
+import java.util.ArrayList;
 
 public class Input {
-	public Input(Institucion institucion) {
+	
+	public int idInstitucion;
+	public ArrayList<Plano> planos;
+	public ArrayList<Equipo> equipos;
+	
+	public Input(int idInstitucion, ArrayList<Plano> planos, ArrayList<Equipo> equipos) {
 		super();
-		this.institucion = institucion;
+		this.idInstitucion = idInstitucion;
+		this.planos = planos;
+		this.equipos = equipos;
 	}
-
-	public Input() {
-	}	
-
-	public Institucion getInstitucion() {
-		return institucion;
+	public int getIdInstitucion() {
+		return idInstitucion;
 	}
-	public void setInstitucion(Institucion institucion) {
-		this.institucion = institucion;
+	public void setIdInstitucion(int idInstitucion) {
+		this.idInstitucion = idInstitucion;
 	}
+	public ArrayList<Plano> getPlanos() {
+		return planos;
+	}
+	public void setPlanos(ArrayList<Plano> planos) {
+		this.planos = planos;
+	}
+	public ArrayList<Equipo> getEquipos() {
+		return equipos;
+	}
+	public void setEquipos(ArrayList<Equipo> equipos) {
+		this.equipos = equipos;
+	}
+	
 
-	public Institucion institucion;
+
 }
