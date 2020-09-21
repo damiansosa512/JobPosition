@@ -1,6 +1,10 @@
 package com.example.demo.model.enties.input;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import org.javatuples.Pair;
+
 import com.example.demo.model.Input;
 import com.example.demo.model.Output;
 import com.example.demo.model.enties.output.PuestosVisita;
@@ -82,12 +86,72 @@ public abstract class Position {
 					Equipo equipo = input.getEquipos().get(j);
 					for (int k=0; k < equipo.getPersonas().size(); k++) {
 						Persona persona = equipo.getPersonas().get(k);																	
-						NodeVectorEquipos nodeVectorEquipos = new NodeVectorEquipos(equipo.idEquipo, persona.getCuil());
+						NodeVectorEquipos nodeVectorEquipos = new NodeVectorEquipos(equipo.idEquipo, persona.getCuil(), persona.isPuestoFijo(), persona.getX(), persona.getY());
 						personas.add(nodeVectorEquipos);
 					}
 				}
 		return personas;
 		}
+	
+	
+	public static void sentarFijos(ArrayList<NodeVectorEquipos> vectorEquipos, ArrayList<NodeVectorCompuesto> vectorCompuestoOrdenado) {
+		for(int i = 0; i < vectorEquipos.size(); i++) {
+			if(vectorEquipos.get(i).isPuestoFijo()) {
+				vectorCompuestoOrdenado.get(i).setCuil(vectorEquipos.get(i).getCuil());
+				vectorCompuestoOrdenado.get(i).setIdEquipo(vectorEquipos.get(i).getIdEquipo());
+				vectorCompuestoOrdenado.get(i).setX(vectorEquipos.get(i).getX());
+				vectorCompuestoOrdenado.get(i).setY(vectorEquipos.get(i).getY());
+				vectorCompuestoOrdenado.get(i).setOcupado(true);
+			}
+		}
+	}
+	
+	public static void cargarLosDemas(ArrayList<NodeVectorEquipos> vectorEquipos, ArrayList<NodeVectorCompuesto> vectorCompuestoOrdenado) {
+		for(int i = 0; i < vectorCompuestoOrdenado.size(); i++) {
+			if(vectorCompuestoOrdenado.get(i).isOcupado()) {
+				
+			}
+		}
+	}		
+	
+	public static int lugaresPreviosLibres(ArrayList<NodeVectorCompuesto> vectorCompuestoOrdenado, int posicion) {
+		int i = 0;
+		while(vectorCompuestoOrdenado.get(i).isOcupado()) {
+			i += 1;
+		}
+		return i;
+	}
+	
+	public static ArrayList<NodeVectorCompuesto> equipoConPuestosVariables(ArrayList<NodeVectorCompuesto> vectorCompuestoOrdenado) {
+		int idEquipo = vectorCompuestoOrdenado.get(0).getIdEquipo();
+		ArrayList <NodeVectorCompuesto> vectorSalida = new ArrayList<>();
+		ArrayList <NodeVectorCompuesto> vectorAux = new ArrayList<>();
+		for(int i = 0; i < vectorCompuestoOrdenado.size(); i++) {			
+			 if (vectorCompuestoOrdenado.get(i).idEquipo == idEquipo){
+				 vectorAux.add(vectorCompuestoOrdenado.get(i));
+			 }else {
+				 if (Position.verificaSiTienePuestosFijos(vectorAux)) {
+					 vectorSalida.addAll(vectorAux);
+					 vectorAux.clear();
+					 idEquipo = vectorCompuestoOrdenado.get(i).idEquipo;
+				 }else {
+					 vectorAux.clear();
+					 idEquipo = vectorCompuestoOrdenado.get(i).idEquipo;
+				 }
+			 }
+		}
+		return vectorSalida;
+	}
+		
+
+	public static boolean verificaSiTienePuestosFijos(ArrayList<NodeVectorCompuesto> vectorCompuestoOrdenado) {
+		ArrayList<NodeVectorCompuesto> nuevo =  (ArrayList<NodeVectorCompuesto>) vectorCompuestoOrdenado.stream().filter(puesto -> puesto.isOcupado()).collect(Collectors.toList());
+				if(nuevo.size() > 0 ) {
+					return true;
+				}else {
+					return false;
+				}
+	}
 	
 	
 	public static Output buildMessage(ArrayList<NodeMatriz> ordenado, ArrayList<NodeVectorEquipos> equipos, int dias) {	
@@ -117,15 +181,6 @@ public abstract class Position {
 	}	
 	
 	
-	public static ArrayList<NodeMatriz> generarVectorOrdenadoPosiciones(NodeMatriz [][] posiciones) {
-		ArrayList<NodeMatriz> vectorOrdenado = new ArrayList<>();		
-		for(int i=0; i < posiciones.length; i++) {
-			for(int j=0; j < posiciones[0].length; j++) {
-				vectorOrdenado.add(posiciones[i][j]);
-			}
-		}
-		return vectorOrdenado;
-	}
 		
 	
 }

@@ -2,7 +2,7 @@ package com.example.demo.model.enties.input;
 
 public class NodeMatriz {
 	
-	public NodeMatriz(String key, int idPlano, String idSector, int idPuesto, int x, int y) {
+	public NodeMatriz(String key, int idPlano, String idSector, int idPuesto, double x, double y) {
 		super();
 		this.key = key;
 		this.idPlano = idPlano;
@@ -10,6 +10,22 @@ public class NodeMatriz {
 		this.idPuesto = idPuesto;
 		this.x = x;
 		this.y = y;
+	}
+
+	public boolean isOcupado() {
+		return ocupado;
+	}
+
+	public void setOcupado(boolean ocupado) {
+		this.ocupado = ocupado;
+	}
+
+	public int getCuil() {
+		return cuil;
+	}
+
+	public void setCuil(int cuil) {
+		this.cuil = cuil;
 	}
 
 	public String key;
@@ -24,8 +40,8 @@ public class NodeMatriz {
 	public int idPlano;
 	public String idSector;
 	public int idPuesto;
-	public int x;
-	public int y;
+	public double x;
+	public double y;
 	
 	public int getIdPlano() {
 		return idPlano;
@@ -54,17 +70,19 @@ public class NodeMatriz {
 	public void setIdPuesto(int idPuesto) {
 		this.idPuesto = idPuesto;
 	}
-	public int getX() {
+	public double getX() {
 		return x;
 	}
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}	
-	public int getY() {
+	public double getY() {
 		return y;
 	}
-
+	public double getPuntoMedioLocal() {
+		return Math.sqrt(this.getX() * this.getX() + this.getY() * this.getY());
+	}
 }

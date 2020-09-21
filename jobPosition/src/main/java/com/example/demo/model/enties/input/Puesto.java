@@ -29,5 +29,9 @@ public class Puesto {
 	public void setPuntoMedio(PuntoMedio puntoMedio) {
 		this.puntoMedio = puntoMedio;
 	}
+	
+	public double getPuntoMedioLocal() {
+		return Math.sqrt(this.getPuntoMedio().getX() * this.getPuntoMedio().getX() + this.getPuntoMedio().getY() * this.getPuntoMedio().getY());
+	}
 
 }
